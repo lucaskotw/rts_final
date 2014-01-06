@@ -1,5 +1,9 @@
 System Synthesis
 ================
+- Decomposition Strategies
+   1. CTC
+   2. CCC
+   3. DCC
 
 Efficient On-Line Schedulability Tests and Configuration Selection
 ==================================================================
