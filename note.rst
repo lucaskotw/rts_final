@@ -72,10 +72,12 @@ System Synthesis
 
       - dangerous to give app with schduling authority
 
-   - DCC
+   - DCC (Distrubuted Concurrency Control)
 
-      Partition the require computation into as many processes as possible so as to
-      maximize the parallelism
+      - Maximizing Concurrent Process
+
+      - Partition the require computation into as many processes as possible so as to
+        maximize the parallelism
 
    - Comparison
 
