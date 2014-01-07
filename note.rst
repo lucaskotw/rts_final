@@ -8,6 +8,164 @@ System Synthesis
 Efficient On-Line Schedulability Tests and Configuration Selection
 ==================================================================
 
+- Motivation
+
+   - Load Shedding
+
+   - Relax timing constraint
+
+   - Load Scaling
+
+      - harmonically related
+
+- Configuration Selection
+
+   - Configuration Selection Problem (easier n^m)
+   
+      - Given a set of configuration, choose a schedulable configuration
+
+   - Period Assignment Problem (harder n*m)
+   
+      - Given a set of adpative processes, choose a schedulable configuration
+
+         - issue of adaptive processes?
+  
+- Schedulability Test for the Liu&Layland Model
+
+   - Need for
+
+      - Exploit harmonic relationship of task periods
+
+      - on-line implementation
+
+      - relax heavy CPU utilization
+
+   - Need of Schedulability Tests
+
+      - Performance Guarantee
+
+      - Resource Reservation
+
+      - Open System Architecture
+
+   - Definition
+
+      - Offspring Set
+
+         - self, child, grandchild, ...
+
+      - RS-representative
+
+         - a process \tau that has the highest period within the set and the
+           utilization factor equal to the sum of the elements ones
+
+      - Reduced Set
+
+         - a set that RS-representative stands for
+
+      - Division Graph
+
+         - represent the divisibility relation among a set of real numbers
+
+      - Fundamental Frequency
+
+         - the minimum number that the division graph can be decomposed
+           into vertex-disjoint linear paths
+
+      - Minimum Linear Covering
+
+         - to find the smallest K such that the vertices of G are partitioned
+           into K vertex-disjoint linear paths
+
+   - Lemma 1
+
+      - okay to merge a offspring set to minimize the scheduling test
+        procedure
+
+      - intuitively choose root
+
+   - Theorem 2
+
+      - Merge multiple offspring set
+
+- Schedulability Test for the Multiframe Model
+
+   - Goal
+
+      Extend reduced-set-based to multiframe model
+
+   - Intention
+
+      - varying timing constraints
+
+      - skipping of process executions in consecutive periods
+
+   - Definition
+
+      - Multiframe process
+
+         - \tau = (\Sigma_i, p_i), where \Sigma_i is an array of N_i execution times
+           (c^0_i, c^1_i,...c^(N_i-1)_i) for some N_i >= 1
+
+      - Peak Execution
+
+         - max (c^0_i, c^1_i,...c^(N_i-1)_i), usually c^0_i
+
+         - (c^0_i, c^1_i,...c^(N_i-1)_i) is in non-increasing order
+
+      - AM (Accumalative Monotonic)
+
+         - the sum will be non-increasing order
+
+      - Critical Instance
+
+         the begining of the period when its peak execution time is requested simultaneously
+         with the peak execution times of all higher priority processes
+
+      - RS-Representative ( the figure! )
+
+         - \tau, which
+
+         - N = LCM(N_i)
+
+         - p_i | p, p = max(p_i)
+
+         - C = sum
+
+      - Reduced set
+
+         - set that \tau represent
+
+      - The RS-representative is an AM multiframe periodic process
+        (of multiframe periodic process)
+
+      - Peak Utilization Factor
+
+         - sum( c^0_i / p_i )
+
+   - Theorem 6
+
+      - schedulable as its critical instance
+         
+- Performance Evaluation
+
+   - Guarantee Ratio
+   
+      (# of guarantee schedulable process sets) / (# of process sets)
+
+- Conclusion
+
+   - Summary
+      
+      - on-line schedulability tests
+
+      - relax heavy CPU utilization
+
+   - Future Search
+
+      - soft and firm real-time process sets
+
+
 Storage Systems
 ===============
 
