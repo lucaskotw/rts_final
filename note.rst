@@ -83,17 +83,17 @@ System Synthesis
       |                             | By Timing    | By Minimizing | By Maximizing |
       |                             | Constraints  | Communication | Parallellism  |
       +-----------------------------+--------------+---------------+---------------+
-      | Processor Speed Requirement | Higher       | 1[#note_1]_   | Lower         |
+      | Processor Speed Requirement | Higher       | 1 [#]_        | Lower         |
       +-----------------------------+--------------+---------------+---------------+
       | Communication Bandwidth     |              | Lower         | Higher        |
       | Requirement                 |              |               |               |
       +-----------------------------+--------------+---------------+---------------+
       | Ease of Understanding       | Good         | Poor          |               |
       +-----------------------------+--------------+---------------+---------------+
-      | Ease of Modification        |              | Poor          | 2[#note_2]_   |
+      | Ease of Modification        |              | Poor          | 2 [#2]_       |
       +-----------------------------+--------------+---------------+---------------+
-      .. [#note_1] Less locking problems and more efficient utilzation of the processor power.
-      .. [#note_2] Additional timing constraint may not involve any change in program, but it
+      .. [#] Less locking problems and more efficient utilzation of the processor power.
+      .. [#] Additional timing constraint may not involve any change in program, but it
       may require more difficult analysis (throw complexity to the OS)
 
 - Another Way to Meet Timing Constriants
