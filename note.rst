@@ -741,7 +741,6 @@ Introduction to Real-Time Databases
 
             - CC with reduce which totally satisfy requirements rarely exists
 
-   - Conservative Concurrency Control
 
    - Optimistic Concurrency Control
 
@@ -781,8 +780,6 @@ Introduction to Real-Time Databases
                The validation of a transaction is performed against concurrently executing transactions
 
             - validate whether the data is writable or data is correct or not
-
-   - Semantics-Based Concurrency Control
 
    - Concurrency Control for Mixed Transaction Systems
 
