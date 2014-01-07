@@ -501,5 +501,290 @@ Storage Systems
 Introduction to Real-Time Databases
 ===================================
 
+- Introduction
+
+- Real-Time v.s. General Purpose Database
+
+   - Basic Definition & ACID Properies
+
+      - Basic Definition
+      
+         - transaction
+
+            a sequence of read and write operation
+
+         - history/schedule
+
+            over a set of transactions is an interleaving of the read and write operation
+            issued by the transactions
+
+         - query transaction
+         
+            consists of *only read operations*
+
+         - update transaction
+
+            may consists *read + write or write only operations*
+
+         - serial schedule
+         
+            a sequence of operations which are issued by transactions one by one
+            (e.g., write operations together and read operation together)
+
+      - ACID properties
+
+         - Atomicity
+         
+            all or nothing
+
+         - Consistency
+
+            consistent transformation of DB states
+         
+         - Isolation
+
+            invisibility for dirty data
+
+         - Durability
+
+            permanently committed updates
+
+         - In real-time databases, relaxing ACID depends on application semantics
+
+   - Correctness Criteria
+
+      - Conventional Criteria
+
+         - Final-State Serializability (NP-hard)
+
+            - Generate the same final state as a serial schedule does
+
+         - View Serializability (NP-hard)
+
+            - Final-State Serializability, and
+
+            - Corresponding transactions have the same view over the database
+
+         - Conflict Serializability (Polynomial)
+
+            The order of conflicting operations is as the same as that of a serial
+            schedule
+
+   - Consistency Constraints
+
+      - Internal Consistency
+
+         - Database satisfies consistency and integrity constraints
+
+      - Absolute/External Consistency
+
+         - Data reflect the changings of the external enviornment
+
+         - e.g., stock index
+
+      - Relative/Temporal Consistency
+
+         - The ages of two data are within a *tolerable length of time*
+
+         - e.g., the temperature and the pressure of a boiler read at time t
+
+   - Needs for Response-Time Predictability
+
+      - Reasons
+
+         - for disk-based databases
+
+            - Blocking and transaction aborting caused by the requirement to meet the ACID
+              properties
+
+            - Unpredictability of the disk access time and page faults
+
+            - Data dependency of transaction executions
+
+         - in order to change
+
+            - use main memory database
+
+            - need worst-case predictability
+
+            - use real memory addressing
+
+            - best effort in scheduling
+
+- Main Memory Database for RTDB
+
+   - Why main memory databases?
+
+      - improve response time
+
+      - reduce unpredictability of response time
+
+         - critical factors of contentions
+
+            - transaction duration and lock granularity
+
+      - Hardware technology improvements
+
+   - What is the cost or research beside money?
+
+      - Higher frequency in data backup
+
+      - Vulnerable to system faliures
+      
+         - efficient logging mechanism
+
+         - recoverability
+
+         - recover time to transaction and system failures
+
+      - Different indexing schemes beside shallow B-tree
+
+- Concurrency Control
+
+   - Real-Time Concurrency Control
+
+      - Issues
+
+         - Data consistency and integrity
+
+         - Urgency of transaction executions
+
+      - Classification
+
+         - Syntatic-based concurrency control
+
+            - Conservative Mechanism (2PL)
+
+               - Prevention of any serializability violation by lock
+                 management
+
+               - Significant blocking cost
+
+               - worst-case driven
+
+               - Pessimistic Concurrency Control
+
+                  Ensure that transactions will not violate serializability
+                  consistency during their executions
+
+                  - 2PL locking + RM or EDF
+
+            - Optimistic Mechanism (Time Stamp)
+
+               - Three phases
+
+                  - read, validation, write
+
+               - Significant aborting cost
+
+               - RWPCP (Read/Write Priority Ceiling Protocol)
+
+                  - Ceiling Definitions
+
+                     - WPL_i for read locks
+
+                     - APL_i for write locks
+
+                  - Ceiling rule
+
+                     - A transaction may lock a data object if its priority is 
+                       higher than the highest RWPL_i of data objects locked by 
+                       other transactions
+
+               - 2-Version RWPCP
+
+                  - Working (write) / Consistent (read) Versions
+
+                  +-------------------+--------------------------------+
+                  |                   | Requested locks                |
+                  +-------------------+-----------+----------+---------+
+                  | Lock already set  | Read      | Write    | Certify |
+                  +-------------------+-----------+----------+---------+
+                  | Read              | Granted   | Granted  | Blocked |
+                  +-------------------+-----------+----------+---------+
+                  | Write             | Granted   | Blocked  | Blocked |
+                  +-------------------+-----------+----------+---------+
+                  | Certify           | Blocked   | Blocked  | Blocked |
+                  +-------------------+-----------+----------+---------+
+
+               - Aborting v.s. Blocking
+
+                  - Basic Aborting Protocol (BAP)
+
+                     - transaction are classified as *abortable* or *non-abortable*
+                       in *an off-line fashion*
+
+                     - semaphore
+
+                        - Lock granted
+
+                        - Blocked
+
+                        - Aborting
+
+                  - Table-Driven Aborting Protocol (TAP)
+
+                     - An instance of transaction \tau_i can abort an instance of
+                       transaction \tau_j only when AB[i, j] = yes
+
+                  - Dynamic Aborting Protocol (DAP)
+
+                     - Run-Time Calculation of Tolerable Blocking Time
+
+                     - Run-Time Determination of Aborting Relationship
+
+
+
+         - Semantics-based concurrency control
+
+            - CC with flexibility in reordering read and write events
+
+            - CC with reduce which totally satisfy requirements rarely exists
+
+   - Conservative Concurrency Control
+
+   - Optimistic Concurrency Control
+
+      - Broadcast Commit
+
+         When a transaction commits, it tells all the transactions that it conflicts
+         with so that they abort
+
+         - When T commits at its validation phase, all lower-priority transactions
+           abort
+
+         - Any higher priority transactions H in conflict with T
+
+            - Sacrifice policy
+
+               abort T
+
+            - Wait policy
+
+               Wait until H commits, If H commits, abort T, otherwise, commit T
+
+            - Wait-X policy
+
+               T commits unless more than X% of the transactions that conflict
+               with it are of a higher priority; otherwise, T waits... (X = 50)
+
+      - Alternation of Serializability
+
+         - Validation Schemes
+
+            - Backward validation
+
+               The validation procedure is performed against recently committed transactions
+
+            - Forward validation
+
+               The validation of a transaction is performed against concurrently executing transactions
+
+            - validate whether the data is writable or data is correct or not
+
+   - Semantics-Based Concurrency Control
+
+   - Concurrency Control for Mixed Transaction Systems
+
 Real-Time Task Synchronization: Timing versus Concurrency
 =========================================================
