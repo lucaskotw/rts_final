@@ -785,3 +785,39 @@ Introduction to Real-Time Databases
 
 Real-Time Task Synchronization: Timing versus Concurrency
 =========================================================
+
+- Introduction
+
+   - Correctness
+
+      - Logic Errors
+
+      - Timing Error
+
+   - Needed pieces
+
+      - timing considerations
+
+      - synchronization
+
+   - Synchronization
+
+- Locks for Priority Inversion Management
+
+- Locks for Concurrency Encouragement
+
+   - A Lower Bound on Priority Ceilings
+
+      - guarantee of one priority inversion might hurt the system concurrency
+        or throughput
+
+   - A Configurable Ceiling Table
+
+      used to manage the number of priority for each task
+
+   - Frequency Locking
+
+      Adjusting the processor frquency only when a task is first scheduled,
+      or a task completes
+
+- Conclusion
