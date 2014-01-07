@@ -90,11 +90,11 @@ System Synthesis
       +-----------------------------+--------------+---------------+---------------+
       | Ease of Understanding       | Good         | Poor          |               |
       +-----------------------------+--------------+---------------+---------------+
-      | Ease of Modification        |              | Poor          | [#2]_       |
+      | Ease of Modification        |              | Poor          | [#2]_         |
       +-----------------------------+--------------+---------------+---------------+
       .. [#] Less locking problems and more efficient utilzation of the processor power.
-      .. [#] Additional timing constraint may not involve any change in program, but it \
-      may require more difficult analysis (throw complexity to the OS)
+      .. [#] Additional timing constraint may not involve any change in program, but it
+         may require more difficult analysis (throw complexity to the OS)
 
 - Another Way to Meet Timing Constriants
 
