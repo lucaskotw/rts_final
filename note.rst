@@ -1,9 +1,123 @@
 System Synthesis
 ================
+
+- Graph-Based Model
+
+   - Communication graph
+
+      - A digraph with vertices and edge weights
+
+      - Computation Time
+
+         - the sum of the weights of the verices of C (C, r, d, p)
+
+      - A task graph C is said being executed in the interval [t_1, t_2]
+        if there is a multiset of functional-element (vertices) executions
+        in [t_1, t_2], which is consistent with the partial ordering C
+
+      - process-based language (a programming model)
+
+         - Process declaration::
+
+            Process <Name>
+
+               activated by (<signal>|Timer)
+
+               <body>
+
+            End
+
+         - Synchronization constraints::
+
+            Rendezvous <Process>
+
+         - Mutual Exclusion Constraints::
+         
+            Rendezvous <Monitor>
+
+         - Monitor::
+
+            Monitor <Name>
+
+               <Body>
+
+            End
+
 - Decomposition Strategies
-   - CTC
-   - CCC
+
+   - CTC (Critical Timing Constraints)
+
+      - Have a process for each timing constraint
+
+      - # of time Constraints = # of process
+
+   - CCC (Centralizing Concurrency Control)
+
+      Minimizing Inter-Process Communication
+
+      - Partition the computation required by the timing constraints
+        into sets such that
+
+         1. Only *compatible* timing constraints are assigned to the same set,
+
+         2. Only timing constraints are share some of the function calls are
+            assigned to the sae set
+
+      - The computation in each set is assigned to a periodic process whose period
+        attribute is set to the *GCD* of the periods in the set
+
+      - Strength
+
+         - eliminate redundant computations
+
+      - dangerous to give app with schduling authority
+
    - DCC
+
+      Partition the require computation into as many processes as possible so as to
+      maximize the parallelism
+
+   - Comparison
+
+      +-----------------------------+--------------+---------------+---------------+
+      |                             | By Timing    | By Minimizing | By Maximizing |
+      |                             | Constraints  | Communication | Parallellism  |
+      +-----------------------------+--------------+---------------+---------------+
+      | Processor Speed Requirement | Higher       | 1[#note_1]    | Lower         |
+      +-----------------------------+--------------+---------------+---------------+
+      | Communication Bandwidth     |              | Lower         | Higher        |
+      | Requirement                 |              |               |               |
+      +-----------------------------+--------------+---------------+---------------+
+      | Ease of Understanding       | Good         | Poor          |               |
+      +-----------------------------+--------------+---------------+---------------+
+      | Ease of Modification        |              | Poor          | 2[#note_2]    |
+      +-----------------------------+--------------+---------------+---------------+
+      ..[#note_1] Less locking problems and more efficient utilzation of the processor power.
+      ..[#note_2] Additional timing constraint may not involve any change in program, but it
+      may require more difficult analysis (throw complexity to the OS)
+
+- Another Way to Meet Timing Constriants
+
+   - Latency Scheduling
+
+      - execution trace
+
+         a processor is a mapping from non-negative integers to the set of the nodes in a 
+         communication graph F plus a null symbol such that::
+
+            F(i) = u if u is executed in the time internal [i, i+1]
+
+      - latency if K time units (the Figure!)
+
+         execution trace has, w.r.t a timing constraint (c, p, d) iff F contains an execution
+         of C in any time interval of length >= K
+
+      - Complexity::
+
+         NP-Hard
+
+      - A static schedule L is feasible w.r.t a set of synchronous timing constraints T_a iff
+        L has a latency of d time units w.r.t every timing contraint (c, p, d) \in T_a
 
 Efficient On-Line Schedulability Tests and Configuration Selection
 ==================================================================
