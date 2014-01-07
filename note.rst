@@ -673,6 +673,9 @@ Introduction to Real-Time Databases
 
             - Optimistic Mechanism (Time Stamp)
 
+               - Any violation of serializability consistency from a transaction
+                 will not be checked up until its validation time.
+
                - Three phases
 
                   - read, validation, write
